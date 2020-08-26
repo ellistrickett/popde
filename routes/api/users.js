@@ -60,7 +60,7 @@ router.post('/', [
       user: {
         id: user.id
       }
-    }
+    };
 
     jwt.sign(
       payload,
