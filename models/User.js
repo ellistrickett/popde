@@ -23,5 +23,5 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-global.UserSchema = global.UserSchema || mongoose.model('User', UserSchema);
+global.UserSchema = global.UserSchema || mongoose.model('user', UserSchema);
 module.exports = global.UserSchema;
