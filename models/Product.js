@@ -1,9 +1,16 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const ProductSchema = new mongoose.Schema({
+const ProductSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
+  },
+  userName: {
+    type: String
+  },
+  avatar: {
+    type: String
   },
   name: {
     type: String,
@@ -33,11 +40,11 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  domesticShipping: {
+  shipping: {
     type: String,
     required: true
   },
-  internationalShipping: {
+  shippingPrice: {
     type: String,
     required: true
   }
