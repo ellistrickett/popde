@@ -63,10 +63,32 @@ router.post('/', [auth, [
 
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.find(). populate('product', ['photo', 'description', 'price']);
+    const products = await Product.find().sort({ date: -1 })
     res.json(products)
   } catch(err) {
     console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+});
+
+//@route   GET api/posts/:id
+//@desc    Get post by ID
+//@access  Public
+
+router.get('/:id', async (req, res) => {
+  try {
+    const products = await Product.findById(req.params.id);
+
+    if(!products) {
+      return res.status(404).json({ msg: 'Post not found' })
+    }
+
+    res.json(products)
+  } catch(err) {
+    console.error(err.message);
+    if(err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Post not found' })
+    }
     res.status(500).send('Server Error')
   }
 });
