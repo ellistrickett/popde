@@ -64,7 +64,7 @@ router.post('/', [auth, [
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find().sort({ date: -1 })
-    res.json(product)
+    res.json(products)
   } catch(err) {
     console.error(err.message);
     res.status(500).send('Server Error')
@@ -122,5 +122,27 @@ router.delete('/:id', auth, async (req, res) => {
     res.status(500).send('Server Error')
   }
 });
+
+//@route   PUT api/products/like/:id
+//@desc    Like a product
+//@access  Private
+router.put('/like/:id', auth, async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    
+    // Check if the has already been liked
+    if(product.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+      return res.status(400).json({ msg: 'Product already liked' });
+    }
+    product.likes.unshift({ user: req.user.id });
+
+    await product.save();
+
+    res.json(product.likes);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+})
 
 module.exports = router;
