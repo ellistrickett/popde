@@ -5,7 +5,7 @@ import depopLogo from'../../img/depop_logo.png';
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <Link to="/">
+      <Link to="/" className="logo">
         <img src={depopLogo} alt="depopLogo" className="logo"/>
       </Link>
       <Link to="/login" className="login">
