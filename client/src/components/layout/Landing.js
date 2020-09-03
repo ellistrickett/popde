@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import appLogo from '../../img/download-app-android.png';
 
 const Landing = () => {
