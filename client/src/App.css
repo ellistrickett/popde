@@ -15,6 +15,7 @@ nav {
 }
 
 .logo {
+  image-rendering: url(img/depop_logo.png);
   width: 120px;
   height: 40px;
   width: auto;
