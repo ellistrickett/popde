@@ -1,16 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import depopLogo from'../../img/depop_logo.png';
 
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <h1>
-        <a href="index.html">Depop</a>
-      </h1>
-      <ul>
-        <li><a href="profiles.html">Developers</a></li>
-        <li><a href="register.html">Register</a></li>
-        <li><a href="login.html">Login</a></li>
-      </ul>
+      <Link to="/">
+        <img src={depopLogo} alt="depopLogo" className="logo"/>
+      </Link>
+      <Link to="/login" className="login">
+        Login
+      </Link>
     </nav>
   )
 }
