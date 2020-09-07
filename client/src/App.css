@@ -11,7 +11,7 @@
 /* ---------------------------------- */
 
 nav {
-  border-bottom:1px solid #ecf0f1;
+  border-bottom: 0.0625rem solid rgb(238, 238, 238);;
   padding-bottom: 40px;
 }
 
@@ -63,3 +63,43 @@ nav {
   top: 52%;
   right: 72.5%;
 }
+
+/* ---------------------------------- */
+/* Register / Login */
+/* ---------------------------------- */
+
+.auth {
+  text-align: center;
+  position: absolute;
+  top: 27%;
+  width: 100%;
+  text-align: center;
+}
+
+.header-text {
+  font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    line-height: 1.75rem;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='date'],
+select,
+textarea {
+  width: 50%;
+  padding: 0.5rem;
+  border-radius: 0.125rem;
+  border-width: 0.0625rem;
+  border-style: solid;
+  border-color: rgb(175, 175, 175);
+}
+
+.form-group {
+  padding: 0.5rem 0.5rem 0px;
+}
+
+
