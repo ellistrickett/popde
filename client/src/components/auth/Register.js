@@ -25,7 +25,6 @@ const Register = ({ setAlert}) => {
   }
   
   return ( <Fragment>
-    <div className="auth">
     <h1 className="header-text">SIGN UP TO CONTINUE</h1>
       <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
@@ -71,8 +70,7 @@ const Register = ({ setAlert}) => {
         <input type="submit" className="btn" value="Register" />
       </form>
       <p className="or">or</p>
-      <Link to="/login">Sign In</Link>
-    </div>
+      <Link to="/login" className="btn">Sign In</Link>
   </Fragment>
   )
 }

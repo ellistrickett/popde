@@ -19,7 +19,6 @@ const Login = () => {
     }
 
   return ( <Fragment>
-    <div className="auth">
       <h1 className="header-text">LOGIN TO CONTINUE</h1>
         <form className="form" onSubmit={e => onSubmit(e)}>
           <div className="form-group">
@@ -45,8 +44,7 @@ const Login = () => {
           <input type="submit" className="btn" value="Login" />
         </form>
         <p className="or">or</p>
-      <Link to="/register">Sign up</Link>
-    </div>
+      <Link to="/register" className="btn">Sign up</Link>
   </Fragment>
   )
 }
