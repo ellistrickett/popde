@@ -5,8 +5,7 @@ const Login = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
-    password2: ''
+    password: ''
   });
 
   const { email, password } = formData; 
