@@ -7,7 +7,11 @@ import { logout } from '../../actions/auth';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
-    <Link to="/" onClick={logout} className="logout">Logout</Link>
+    <div>
+      <Link to="/" onClick={logout} className="logout">Logout</Link>
+      <Link to ="/products/create" className="sell">Sell</Link>
+      <Link to ="/search" className="search">Search</Link>
+    </div>
   );
 
   const guestLinks = (
