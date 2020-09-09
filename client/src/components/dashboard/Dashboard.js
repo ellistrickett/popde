@@ -11,6 +11,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile }) => {
   return (
     <Fragment>
       <h1>{user && user.name}</h1>
+      <p>@{user && user.username}</p>
     </Fragment>   
   )
 }
