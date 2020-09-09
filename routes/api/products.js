@@ -32,7 +32,9 @@ router.post('/', [auth, [
     const user = await User.findById(req.user.id).select('-password');
 
     const newProduct = new Product({
-      
+      userId: req.user.id,
+      userName: user.name,
+      username: user.username,
       name: req.body.name,
       photo: req.body.photo,
       description: req.body.description,
@@ -41,10 +43,7 @@ router.post('/', [auth, [
       shipping: req.body.shipping,
       price: req.body.price,
       shipping: req.body.shipping,
-      shippingPrice: req.body.shippingPrice,
-      userName: user.name,
-      avatar: user.avatar,
-      user: req.user.id
+      shippingPrice: req.body.shippingPrice
     });
 
     const product = await newProduct.save();
@@ -95,7 +94,7 @@ router.get('/:id', async (req, res) => {
 
 //@route   DELETE api/products/:id
 //@desc    Delete a product
-//@access  Public
+//@access  Private
 
 router.delete('/:id', auth, async (req, res) => {
   try {

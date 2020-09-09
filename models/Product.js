@@ -6,10 +6,13 @@ const ProductSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
+  userId: {
+    type: String
+  },
   userName: {
     type: String
   },
-  avatar: {
+  username: {
     type: String
   },
   name: {
@@ -48,14 +51,6 @@ const ProductSchema = new Schema({
     type: String,
     required: true
   },
-  likes: [ 
-    {
-    user: {
-      type: Schema.Types.ObjectId, 
-      ref: 'users'
-    }
-  }
-],
 });
 
 module.exports = Product = mongoose.model('product', ProductSchema);

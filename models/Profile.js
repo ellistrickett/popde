@@ -9,7 +9,13 @@ const ProfileSchema = new Schema({
   description: {
     type: String,
     required: true
-  }
+  },
+  selling: [{
+    products: {
+      type: Schema.Types.ObjectId, 
+      ref: 'product'
+    }
+  }]
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

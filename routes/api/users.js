@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 
-const User = require('../../models/user');
+const User = require('../../models/User');
 
 //@route   POST api/users
 //@desc    Register user
@@ -16,22 +16,33 @@ router.post('/', [
     .not()
     .isEmpty(),
   check('email', 'Please include a valid email').isEmail(),
+  check('username', 'Please enter a username')    
+    .not()
+    .isEmpty(),
   check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
   ], 
   async (req, res) => {
     const errors = validationResult(req);
+    console.log(errors)
     if(!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
     }
-
-    const { name, email, password } = req.body;
+    
+    const { name, email, username, password } = req.body;
 
     try {
-    // See if the user exists
+    // See if the email exists
     let user = await User.findOne({ email });
 
     if(user) {
-      return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
+      return res.status(400).json({ errors: [{ msg: 'Email has already been used' }] });
+    }
+
+    // See if username exists
+    let user2 = await User.findOne({ username });
+
+    if(user2) {
+      return res.status(400).json({ errors: [{ msg: 'Username already exists' }] });
     }
 
     // Get users gravatar
@@ -44,6 +55,7 @@ router.post('/', [
     user = new User({
       name,
       email,
+      username,
       avatar,
       password
     });
