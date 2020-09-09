@@ -1,18 +1,36 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import depopLogo from'../../img/depop_logo.png';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/auth';
 
-const Navbar = () => {
+const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const authLinks = (
+    <Link to="/" onClick={logout} className="logout">Logout</Link>
+  );
+
+  const guestLinks = (
+    <Link to="/login" className="login">Login</Link>
+  );
+
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
         <img src={depopLogo} alt="depopLogo" className="logo"/>
       </Link>
-      <Link to="/login" className="login">
-        Login
-      </Link>
+      { !loading && (<Fragment>{ isAuthenticated ? authLinks : guestLinks }</Fragment>) }
     </nav>
   )
 }
 
-export default Navbar
+Navbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, { logout })(Navbar);
