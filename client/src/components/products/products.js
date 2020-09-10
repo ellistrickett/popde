@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ProductItem from './ProductItem';
 import { getProducts } from '../../actions/product';
 
 const Products = ({ getProducts, product: { products, loading }}) => {
@@ -9,9 +10,14 @@ const Products = ({ getProducts, product: { products, loading }}) => {
   }, [getProducts]);
 
   return (
-    <div>
-
-    </div>
+    <Fragment>
+      <h1>Products</h1>
+      <div>
+        {products.map(product => (
+          <ProductItem key={product._id} product={product} />
+        ))}
+      </div>
+    </Fragment>
   )
 }
 
