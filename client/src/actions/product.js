@@ -21,3 +21,38 @@ export const getProducts = () => async dispatch => {
     })
   }
 }
+
+// Create or update product
+export const createProduct = (formData, history, edit = false) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const res = await axios.post('/api/products', formData, config)
+
+    dispatch({ 
+      type: GET_PRODUCTS,
+      payload: res.data
+    });
+
+    dispatch(setAlert(edit ? 'Product Updated' : 'Product Created'));
+
+    if(!edit) {
+      history.push('/dashboard');
+    }
+  } catch (err) {
+    const error = err.response.data.errors
+
+    if (error) {
+      error.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+    }
+
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}

@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react';
+import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createProduct } from '../../actions/product';
 
-const CreateProduct = props => {
+const CreateProduct = ({ createProduct, history }) => {
   const [formData, setFormData] = useState({
     name: '',
     photo: '',
@@ -26,14 +28,19 @@ const CreateProduct = props => {
   } = formData;
 
   const onChangeImage = e => {
-    this.setState({ image: e.target.files[0] });
+    setFormData({ ...formData, image: e.target.files[0] });
     };
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
+  const onSubmit = e => {
+    e.preventDefault();
+    createProduct(formData, history);
+  }
+
   return (
     <Fragment>
-      <form encType='multipart/form-data'> 
+      <form encType='multipart/form-data' onSubmit={e => onSubmit(e)}> 
         <div className="field">
             <label>Image</label>
             <input 
@@ -107,13 +114,14 @@ const CreateProduct = props => {
             />
           </div>
         </div>
+        <input type="submit" className="btn" value="Product" />
       </form>
     </Fragment>
   )
 }
 
 CreateProduct.propTypes = {
-
+  createProduct: PropTypes.func.isRequired
 }
 
-export default CreateProduct
+export default connect(null, { createProduct })(withRouter(CreateProduct));
