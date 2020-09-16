@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createProduct } from '../../actions/product';
 
 const CreateProduct = ({ createProduct, history }) => {
+  const [previewSource, setPreviewSource] = useState()
   const [formData, setFormData] = useState({
     name: '',
     photo: '',
@@ -27,15 +28,25 @@ const CreateProduct = ({ createProduct, history }) => {
     shippingPrice
   } = formData;
 
-  const onChangeImage = e => {
-    setFormData({ ...formData, image: e.target.files[0] });
-    };
-
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
+
+  const onChangeImage = e => {
+    const file = e.target.files[0]
+    previewFile(file);
+  }
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    }
+  }
 
   const onSubmit = e => {
     e.preventDefault();
-    createProduct(formData, history);
+    const formDataWithImage = { ...formData, photo: previewSource }
+    createProduct(formDataWithImage, history);
   }
 
   return (
@@ -48,7 +59,8 @@ const CreateProduct = ({ createProduct, history }) => {
               placholder="Photo"
               name="photo"
               value={photo}
-              onChange={e => onChangeImage(e)} 
+              onChange={e => onChangeImage(e)}
+              multiple
             />
             <div className="form-group">
             <input
@@ -116,6 +128,9 @@ const CreateProduct = ({ createProduct, history }) => {
         </div>
         <input type="submit" className="btn" value="Product" />
       </form>
+      {previewSource && (
+        <img src={previewSource} alt="chosen" style={{height: '300px'}}/>
+      )}
     </Fragment>
   )
 }

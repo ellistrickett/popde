@@ -20,8 +20,8 @@ const ProductSchema = new Schema({
     required: true
   },
   photo: {
-    data: Buffer,
-    contentType: String
+    type: String,
+    required: true
   },
   description: {
     type: String,
