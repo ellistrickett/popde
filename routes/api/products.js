@@ -68,8 +68,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+//@route   GET api/products/my
+//@desc    Get all products by user
+//@access  Public
+
+router.get('/my', auth, async (req, res) => {
+  try {
+    const products = await Product.find({ userId: req.user.id }).sort({ date: -1 })
+    res.json(products)
+  } catch(err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+});
+
 //@route   GET api/products/:id
-//@desc    Get product by ID
+//@desc    Get product by product ID
 //@access  Public
 
 router.get('/:id', async (req, res) => {
