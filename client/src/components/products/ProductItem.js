@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const ProductItem = ({ auth, product: { _id, photo, price }}) => {
   return (
     <div>
-      <img class='product-photo' src={photo} alt='' />
+      <img className='product-photo' src={photo} alt='' />
       <p>{_id}</p>
       <p>{price}</p>
     </div>

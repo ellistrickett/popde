@@ -5,7 +5,6 @@ const { check, validationResult } = require('express-validator')
 
 
 const Product = require('../../models/Product');
-const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
 //@route   POST api/products
