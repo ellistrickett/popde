@@ -1,6 +1,7 @@
 import {
   GET_PRODUCTS,
-  PRODUCT_ERROR
+  PRODUCT_ERROR,
+  GET_MY_PRODUCTS
 } from '../actions/types';
 
 const initialState = {
@@ -15,6 +16,7 @@ export default function(state=initialState, action) {
 
   switch(type) {
     case GET_PRODUCTS:
+    case GET_MY_PRODUCTS:
       return {
         ...state,
         products: payload,

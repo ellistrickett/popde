@@ -12,5 +12,6 @@ export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const PRODUCT_ERROR = 'PRODUCTS_ERROR';
+export const GET_MY_PRODUCTS = 'GET_MY_PRODUCTS';
 
 
