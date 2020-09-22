@@ -3,7 +3,8 @@ import { setAlert } from './alert';
 import { 
   GET_PRODUCTS,
   PRODUCT_ERROR,
-  GET_MY_PRODUCTS
+  GET_MY_PRODUCTS,
+  GET_PRODUCT
 } from './types';
 
 // Get products
@@ -69,6 +70,23 @@ export const createProduct = (formData, history, edit = false) => async dispatch
       error.forEach(error => dispatch(setAlert(error.msg, 'danger')))
     }
 
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+// Get product
+export const getProduct = id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/products/${id}`);
+
+    dispatch({ 
+      type: GET_PRODUCT,
+      payload: res.data
+    })
+  } catch (err) {
     dispatch({
       type: PRODUCT_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

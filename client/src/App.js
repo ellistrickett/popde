@@ -8,6 +8,7 @@ import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import Products from './components/products/products';
+import Product from './components/product/product';
 import CreateProduct from './components/product-form/CreateProduct';
 import PrivateRoute from './components/routing/PrivateRoute';
 // Redux
@@ -39,6 +40,7 @@ const App = () => {
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <Route exact path="/search" component={Products} />
           <PrivateRoute exact path="/products/create" component={CreateProduct} />
+          <Route exact path="/product/:id" component={Product} />
         </Switch>
       </section>
     </Fragment>
