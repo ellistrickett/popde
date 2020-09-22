@@ -2,7 +2,8 @@ import {
   GET_PRODUCTS,
   PRODUCT_ERROR,
   GET_MY_PRODUCTS,
-  GET_PRODUCT
+  GET_PRODUCT, 
+  UPDATE_LIKES
 } from '../actions/types';
 
 const initialState = {
@@ -33,6 +34,12 @@ export default function(state=initialState, action) {
         return {
           ...state,
           products: payload,
+          loading: false
+        }
+      case UPDATE_LIKES:
+        return { 
+          ...state,
+          product: { likes: payload.products },
           loading: false
         }
       default:

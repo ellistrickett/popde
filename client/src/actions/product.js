@@ -4,7 +4,8 @@ import {
   GET_PRODUCTS,
   PRODUCT_ERROR,
   GET_MY_PRODUCTS,
-  GET_PRODUCT
+  GET_PRODUCT,
+  UPDATE_LIKES
 } from './types';
 
 // Get products
@@ -85,6 +86,40 @@ export const getProduct = id => async dispatch => {
     dispatch({ 
       type: GET_PRODUCT,
       payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+// Add like
+export const addLike = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/products/like/${id}`);
+
+    dispatch({ 
+      type: UPDATE_LIKES,
+      payload: { id, likes: res.data}
+    })
+  } catch (err) {
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+// Remove like
+export const removeLike = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/products/unlike/${id}`);
+
+    dispatch({ 
+      type: UPDATE_LIKES,
+      payload: { id, likes: res.data}
     })
   } catch (err) {
     dispatch({

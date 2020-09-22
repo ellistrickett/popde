@@ -14,5 +14,5 @@ export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const PRODUCT_ERROR = 'PRODUCTS_ERROR';
 export const GET_MY_PRODUCTS = 'GET_MY_PRODUCTS';
-
+export const UPDATE_LIKES = 'UPDATE_LIKES';
 
