@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { getProduct } from '../../actions/product';
-import { addLike, removeLike } from '../../actions/product';
+import { addLike, removeLike } from '../../actions/likes';
 
 
 const Product = ({ 

@@ -1,0 +1,40 @@
+import axios from 'axios';
+import { 
+  LIKE_PRODUCT,
+  UNLIKE_PRODUCT,
+  PRODUCT_ERROR
+} from './types';
+
+// Add like
+export const addLike = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/products/like/${id}`);
+
+    dispatch({ 
+      type: LIKE_PRODUCT,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+// Remove like
+export const removeLike = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/products/unlike/${id}`);
+
+    dispatch({ 
+      type: UNLIKE_PRODUCT,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
