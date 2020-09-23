@@ -26,7 +26,7 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
 });
 
 global.UserSchema = global.UserSchema || mongoose.model('user', UserSchema);
