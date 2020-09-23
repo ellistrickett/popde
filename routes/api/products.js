@@ -183,4 +183,18 @@ router.put('/unlike/:id', auth, async (req, res) => {
   }
 })
 
+//@route   GET api/products/my
+//@desc    Get all products liked by a user
+//@access  Private
+
+router.get('/my/likes', auth, async (req, res) => {
+  try {
+    const products = await UserLike.find({ user: req.user.id }).sort({ date: -1 })
+    res.json(products)
+  } catch(err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+});
+
 module.exports = router;
