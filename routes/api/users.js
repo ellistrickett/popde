@@ -6,11 +6,15 @@ const jwt = require('jsonwebtoken')
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 
+const auth = require('../../middleware/auth');
+
 const User = require('../../models/User');
+const Product = require('../../models/Product');
 
 //@route   POST api/users
 //@desc    Register user
 //@access  Public
+
 router.post('/', [
   check('name', 'Name is required')
     .not()
@@ -89,5 +93,35 @@ router.post('/', [
     }
   }
 );
+
+//@route   PUT api/users/follow
+//@desc    Follow a user
+//@access  Private
+
+router.put('/follow/:id', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id)
+    const userToBeFollowed = await User.findById(req.params.id)
+
+    if(user === userToBeFollowed) {
+      return res.status(400).json({ msg : "You cannot follow yourself"})
+    } 
+
+    if(userToBeFollowed.followers.filter(follower => follower.user.toString() === req.user.id).length > 0) {
+      return res.status(400).json({ msg : "You already follow this user"})
+    }
+
+    userToBeFollowed.followers.unshift({ user: req.user.id })
+    userToBeFollowed.save()
+
+    user.following.unshift({ user: req.params.id});
+    user.save()
+    res.json(user)
+
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+})
 
 module.exports = router;
