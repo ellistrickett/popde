@@ -124,4 +124,35 @@ router.put('/follow/:id', auth, async (req, res) => {
   }
 })
 
+//@route   PUT api/users/follow
+//@desc    Follow a user
+//@access  Private
+
+router.put('/unfollow/:id', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id)
+    const userToBeUnfollowed = await User.findById(req.params.id)
+
+    if(user === userToBeUnfollowed) {
+      return res.status(400).json({ msg : "You cannot unfollow yourself"})
+    } 
+
+    if(userToBeUnfollowed.followers.filter(follower => follower.user.toString() === req.user.id).length === 0) {
+      return res.status(400).json({ msg : "You dont follow this person"})
+    }
+
+    userToBeUnfollowed.followers.splice(userToBeUnfollowed.followers.findIndex(follower => follower.user === req.user.id), 1)
+    userToBeUnfollowed.save()
+
+    user.following.splice(user.following.findIndex(followee => followee.user === req.params.id), 1)
+    user.save()
+
+    res.json(user)
+
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+})
+
 module.exports = router;
