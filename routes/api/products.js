@@ -189,8 +189,9 @@ router.put('/unlike/:id', auth, async (req, res) => {
 
 router.get('/my/likes', auth, async (req, res) => {
   try {
-    const products = await UserLike.find({ user: req.user.id }).sort({ date: -1 })
-    res.json(products)
+    const likes = await UserLike.find({ user: req.user.id }).sort({ date: -1 })
+    const result = await Product.find({ _id: likes.map(like => (like.product)) })
+    res.json(result)
   } catch(err) {
     console.error(err.message);
     res.status(500).send('Server Error')

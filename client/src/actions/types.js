@@ -16,6 +16,7 @@ export const PRODUCT_ERROR = 'PRODUCTS_ERROR';
 export const GET_MY_PRODUCTS = 'GET_MY_PRODUCTS';
 export const LIKE_PRODUCT = 'LIKE_PRODUCT';
 export const UNLIKE_PRODUCT = 'UNLIKE_PRODUCT';
+export const GET_MY_LIKES = 'GET_MY_LIKES';
 
 
 

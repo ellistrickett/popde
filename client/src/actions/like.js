@@ -1,9 +1,12 @@
 import axios from 'axios';
+import _ from 'lodash';
 import { 
   LIKE_PRODUCT,
   UNLIKE_PRODUCT,
-  PRODUCT_ERROR
+  PRODUCT_ERROR,
+  GET_MY_LIKES,
 } from './types';
+import { getProduct } from './product';
 
 // Add like
 export const addLike = id => async dispatch => {
@@ -29,6 +32,23 @@ export const removeLike = id => async dispatch => {
 
     dispatch({ 
       type: UNLIKE_PRODUCT,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+// My likes
+export const getMyLikes = () => async dispatch => {
+  try {
+    const res = await axios.get(`/api/products/my/likes`);
+
+    dispatch({ 
+      type: GET_MY_LIKES,
       payload: res.data
     })
   } catch (err) {

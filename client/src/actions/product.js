@@ -4,8 +4,7 @@ import {
   GET_PRODUCTS,
   PRODUCT_ERROR,
   GET_MY_PRODUCTS,
-  GET_PRODUCT,
-  UPDATE_LIKES
+  GET_PRODUCT
 } from './types';
 
 // Get products

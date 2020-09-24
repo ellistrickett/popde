@@ -1,10 +1,12 @@
 import {
   LIKE_PRODUCT,
-  UNLIKE_PRODUCT
+  UNLIKE_PRODUCT,
+  GET_MY_LIKES
 } from '../actions/types';
 
 const initialState = {
-  likes: null,
+  likes: [],
+  like: null,
   loading: true,
   error: {}
 }
@@ -20,6 +22,12 @@ export default function(state=initialState, action) {
         loading: false
       }
     case UNLIKE_PRODUCT:
+      return { 
+        ...state,
+        likes: payload,
+        loading: false
+      }
+    case GET_MY_LIKES:
       return { 
         ...state,
         likes: payload,
