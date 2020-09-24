@@ -9,7 +9,6 @@ const ProductItem = ({ auth, product: { _id, photo, price }}) => {
       <Link to={`/product/${_id}`} >
         <img className='product-photo' src={photo} alt='' />
       </Link>
-      <p>{_id}</p>
       <p>{price}</p>
     </div>
   )

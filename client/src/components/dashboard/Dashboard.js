@@ -5,7 +5,13 @@ import { getMyProducts } from '../../actions/product';
 import { getMyLikes } from '../../actions/like';
 import ProductItem from '../products/ProductItem';
 
-const Dashboard = ({ getMyProducts, product: { products }, getMyLikes, like: { likes }, auth: { user }}) => {
+const Dashboard = ({ 
+  getMyProducts, 
+  product: { products }, 
+  getMyLikes, 
+  like: { likes }, 
+  auth: { user }
+}) => {
   useEffect(() => {
     getMyProducts(); 
     getMyLikes();
@@ -26,6 +32,12 @@ const Dashboard = ({ getMyProducts, product: { products }, getMyLikes, like: { l
         {likes && likes.map(like => (
           <ProductItem key={like._id} product={like} />
         ))}
+      </div>
+      <div>
+        Followers
+      </div>
+      <div>
+        Following
       </div>
     </Fragment>   
   )

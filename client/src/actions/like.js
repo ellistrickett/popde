@@ -1,12 +1,10 @@
 import axios from 'axios';
-import _ from 'lodash';
 import { 
   LIKE_PRODUCT,
   UNLIKE_PRODUCT,
   PRODUCT_ERROR,
   GET_MY_LIKES,
 } from './types';
-import { getProduct } from './product';
 
 // Add like
 export const addLike = id => async dispatch => {
