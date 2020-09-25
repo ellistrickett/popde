@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getMyProducts } from '../../actions/product';
 import { getMyLikes } from '../../actions/like';
+import { getMyFollowers, getMyFollowing } from '../../actions/follow';
 import ProductItem from '../products/ProductItem';
 
 const Dashboard = ({ 
+  getMyFollowers,
+  getMyFollowing,
   getMyProducts, 
   product: { products }, 
   getMyLikes, 
@@ -13,9 +16,11 @@ const Dashboard = ({
   auth: { user }
 }) => {
   useEffect(() => {
+    getMyFollowers();
+    getMyFollowing();
     getMyProducts(); 
     getMyLikes();
-  }, [getMyProducts, getMyLikes]);
+  }, [getMyProducts, getMyLikes, getMyFollowers, getMyFollowing]);
 
   return (
     <Fragment>
@@ -47,6 +52,8 @@ Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
   getMyProducts: PropTypes.func.isRequired,
   getMyLikes: PropTypes.func.isRequired,
+  getMyFollowing: PropTypes.func.isRequired,
+  getMyFollowers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -55,4 +62,4 @@ const mapStateToProps = state => ({
   like: state.like
 })
 
-export default connect(mapStateToProps, { getMyProducts, getMyLikes })(Dashboard);
+export default connect(mapStateToProps, { getMyProducts, getMyLikes, getMyFollowing, getMyFollowers })(Dashboard);
