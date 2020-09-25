@@ -11,6 +11,7 @@ export const GET_PROFILE = 'GET_PROFILE';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const GET_PRODUCTS_BY_SHOP = 'GET_PRODUCTS_BY_SHOP';
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const PRODUCT_ERROR = 'PRODUCTS_ERROR';
 export const GET_MY_PRODUCTS = 'GET_MY_PRODUCTS';

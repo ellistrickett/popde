@@ -4,7 +4,7 @@ import {
   SHOP_ERROR
 } from './types';
 
-// Add like
+// Get shop
 export const getShop = id => async dispatch => {
   try {
     const res = await axios.get(`/api/users/${id}`);
@@ -20,3 +20,4 @@ export const getShop = id => async dispatch => {
     })
   }
 }
+

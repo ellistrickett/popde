@@ -4,7 +4,8 @@ import {
   GET_PRODUCTS,
   PRODUCT_ERROR,
   GET_MY_PRODUCTS,
-  GET_PRODUCT
+  GET_PRODUCT,
+  GET_PRODUCTS_BY_SHOP
 } from './types';
 
 // Get products
@@ -40,7 +41,6 @@ export const getMyProducts = () => async dispatch => {
     })
   }
 }
-
 
 // Create or update product
 export const createProduct = (formData, history, edit = false) => async dispatch => {
@@ -84,6 +84,23 @@ export const getProduct = id => async dispatch => {
 
     dispatch({ 
       type: GET_PRODUCT,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+// Get products by user
+export const getProductsByShop = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/products/user/${id}`);
+
+    dispatch({ 
+      type: GET_PRODUCTS_BY_SHOP,
       payload: res.data
     })
   } catch (err) {
