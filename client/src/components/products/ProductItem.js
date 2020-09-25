@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 
 const ProductItem = ({ auth, product: { _id, photo, price }}) => {
   return (
-    <div>
-      <Link to={`/product/${_id}`} >
-        <img className='product-photo' src={photo} alt='' />
-      </Link>
-      <p>{price}</p>
-    </div>
+    <Fragment>
+      <div>
+        <Link to={`/product/${_id}`} >
+          <img className='product-photo' src={photo} alt='' />
+        </Link>
+        <p>{price}</p>
+      </div>
+    </Fragment>
   )
 }
 

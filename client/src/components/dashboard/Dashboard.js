@@ -9,6 +9,7 @@ import ProductItem from '../products/ProductItem';
 const Dashboard = ({ 
   getMyFollowers,
   getMyFollowing,
+  follow: { followers, following },
   getMyProducts, 
   product: { products }, 
   getMyLikes, 
@@ -39,10 +40,16 @@ const Dashboard = ({
         ))}
       </div>
       <div>
-        Followers
+        Followers<br />
+        @{followers && followers.map(follower => (
+          follower.username
+        ))}
       </div>
       <div>
-        Following
+        Following<br />
+        @{following && following.map(followee => (
+          followee.username
+        ))}
       </div>
     </Fragment>   
   )
@@ -60,8 +67,7 @@ const mapStateToProps = state => ({
   auth: state.auth,
   product: state.product,
   like: state.like,
-  following: state.following, 
-  followers: state.followers  
+  follow: state.follow, 
 })
 
 export default connect(mapStateToProps, { getMyProducts, getMyLikes, getMyFollowing, getMyFollowers })(Dashboard);
