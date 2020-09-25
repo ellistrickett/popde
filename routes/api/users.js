@@ -185,8 +185,19 @@ router.get('/my/followers', auth, async (req, res) => {
   }
 });
 
+//@route   GET api/users/:id
+//@desc    Get a specific user
+//@access  Public
 
-
+router.get('/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select('-password');
+    res.json(user)
+  } catch(err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+});
 
 
 module.exports = router;

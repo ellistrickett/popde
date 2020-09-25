@@ -164,7 +164,7 @@ router.put('/like/:id', auth, async (req, res) => {
 })
 
 //@route   PUT api/products/unlike/:id
-//@desc    Like a product
+//@desc    Unike a product
 //@access  Private
 router.put('/unlike/:id', auth, async (req, res) => {
   try {
