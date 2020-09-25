@@ -156,7 +156,7 @@ router.put('/unfollow/:id', auth, async (req, res) => {
 })
 
 //@route   GET api/users/my/following
-//@desc    Get all my followers and following
+//@desc    Get users who the user is following
 //@access  Private
 
 router.get('/my/following', auth, async (req, res) => {
@@ -170,6 +170,20 @@ router.get('/my/following', auth, async (req, res) => {
   }
 });
 
+//@route   GET api/users/my/followers
+//@desc    Get all users followers
+//@access  Private
+
+router.get('/my/followers', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    const result = await User.find({ _id: user.followers.map(follower => (follower.user)) })
+    res.json(result)
+  } catch(err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+});
 
 
 
