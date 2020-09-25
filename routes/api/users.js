@@ -125,7 +125,7 @@ router.put('/follow/:id', auth, async (req, res) => {
 })
 
 //@route   PUT api/users/follow
-//@desc    Follow a user
+//@desc    Unfollow a user
 //@access  Private
 
 router.put('/unfollow/:id', auth, async (req, res) => {
@@ -154,5 +154,14 @@ router.put('/unfollow/:id', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 })
+
+//@route   GET api/users/my/follow
+//@desc    Get all my followers and following
+//@access  Private
+
+
+
+
+
 
 module.exports = router;

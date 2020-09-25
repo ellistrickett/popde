@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { getProduct } from '../../actions/product';
 import { addLike, removeLike } from '../../actions/like';
-import { followUser } from '../../actions/follow';
+import { followUser, unfollowUser } from '../../actions/follow';
 
 
 const Product = ({ 
+  unfollowUser,
   followUser,
   addLike, 
   removeLike,
@@ -28,6 +29,7 @@ const Product = ({
         {product && product.username}
       </div>
       <button onClick={e => followUser(product.userId)}>Follow</button>
+      <button onClick={e => unfollowUser(product.userId)}>Unfollow</button>
     </Fragment>
 
   )
@@ -42,4 +44,4 @@ const mapStateToProps = state => ({
   product: state.product
 })
 
-export default connect(mapStateToProps, { getProduct, addLike, removeLike, followUser } )(Product)
+export default connect(mapStateToProps, { getProduct, addLike, removeLike, followUser, unfollowUser } )(Product)

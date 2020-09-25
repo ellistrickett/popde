@@ -1,5 +1,6 @@
 import {
   FOLLOW_USER,
+  UNFOLLOW_USER,
   FOLLOW_ERROR,
 } from '../actions/types';
 
@@ -14,6 +15,7 @@ export default function(state=initialState, action) {
   const { type, payload } = action;
   switch(type) {
     case FOLLOW_USER:
+      case UNFOLLOW_USER: 
       return { 
         ...state,
         follows: payload,

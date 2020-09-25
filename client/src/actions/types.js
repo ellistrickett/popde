@@ -18,6 +18,7 @@ export const LIKE_PRODUCT = 'LIKE_PRODUCT';
 export const UNLIKE_PRODUCT = 'UNLIKE_PRODUCT';
 export const GET_MY_LIKES = 'GET_MY_LIKES';
 export const FOLLOW_USER = 'FOLLOW_USER';
+export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 export const FOLLOW_ERROR = 'FOLLOW_ERROR';
 
 

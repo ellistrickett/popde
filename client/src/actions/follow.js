@@ -7,13 +7,30 @@ import {
   GET_MY_FOLLOWING
 } from './types';
 
-// Add like
+// Follow user
 export const followUser = id => async dispatch => {
   try {
-    const res = await axios.put(`/api/user/follow/${id}`);
+    const res = await axios.put(`/api/users/follow/${id}`);
 
     dispatch({ 
       type: FOLLOW_USER,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: FOLLOW_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+// Unfollow user
+export const unfollowUser = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/users/unfollow/${id}`);
+
+    dispatch({ 
+      type: UNFOLLOW_USER,
       payload: res.data
     })
   } catch (err) {
