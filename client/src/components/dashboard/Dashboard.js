@@ -5,6 +5,7 @@ import { getMyProducts } from '../../actions/product';
 import { getMyLikes } from '../../actions/like';
 import { getMyFollowers, getMyFollowing } from '../../actions/follow';
 import ProductItem from '../products/ProductItem';
+import ShopItem from '../shop/ShopItem';
 
 const Dashboard = ({ 
   getMyFollowers,
@@ -42,13 +43,13 @@ const Dashboard = ({
       <div>
         Followers<br />
         @{followers && followers.map(follower => (
-          follower.username
+          <ShopItem key={follower._id} shop={follower} />
         ))}
       </div>
       <div>
         Following<br />
         @{following && following.map(followee => (
-          followee.username
+          <ShopItem key={followee._id} shop={followee} />
         ))}
       </div>
     </Fragment>   
