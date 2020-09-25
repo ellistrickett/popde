@@ -59,7 +59,9 @@ Dashboard.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   product: state.product,
-  like: state.like
+  like: state.like,
+  following: state.following, 
+  followers: state.followers  
 })
 
 export default connect(mapStateToProps, { getMyProducts, getMyLikes, getMyFollowing, getMyFollowers })(Dashboard);

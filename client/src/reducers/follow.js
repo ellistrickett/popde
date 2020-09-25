@@ -7,8 +7,10 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  follows: [],
+  following: [],
+  followers: [],
   follow: null,
+  unfollow: null,
   loading: true,
   error: {}
 }
@@ -16,13 +18,28 @@ const initialState = {
 export default function(state=initialState, action) {
   const { type, payload } = action;
   switch(type) {
-    case FOLLOW_USER:
-    case UNFOLLOW_USER: 
     case GET_MY_FOLLOWING:
+      return { 
+        ...state,
+        following: payload,
+        loading: false
+      }
     case GET_MY_FOLLOWERS:
       return { 
         ...state,
-        follows: payload,
+        followers: payload,
+        loading: false
+      }
+    case FOLLOW_USER:
+      return { 
+        ...state,
+        follow: payload,
+        loading: false
+      }
+    case UNFOLLOW_USER: 
+      return { 
+        ...state,
+        unfollow: payload,
         loading: false
       }
     case FOLLOW_ERROR:
