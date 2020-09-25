@@ -5,7 +5,7 @@ import { getMyProducts } from '../../actions/product';
 import { getMyLikes } from '../../actions/like';
 import { getMyFollowers, getMyFollowing } from '../../actions/follow';
 import ProductItem from '../products/ProductItem';
-import ShopItem from '../shop/ShopItem';
+import ShopItem from '../shops/ShopItem';
 
 const Dashboard = ({ 
   getMyFollowers,

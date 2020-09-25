@@ -4,11 +4,13 @@ import auth from './auth';
 import product from './product';
 import like from './like';
 import follow from './follow';
+import shop from './shop';
 
 export default combineReducers({
   alert,
   auth,
   product,
   like,
-  follow
+  follow,
+  shop
 });
