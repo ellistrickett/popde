@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getShop, getFollowersByShop, getFollowingByShop } from '../../actions/shop';
+import { getShop, getFollowersByShop, getFollowingByShop, getLikesByShop } from '../../actions/shop';
 import { followUser, unfollowUser } from '../../actions/follow';
 import { getProductsByShop } from '../../actions/product';
 import ProductItem from '../products/ProductItem';
@@ -16,6 +16,8 @@ const Shop = ({
   getFollowersByShop,
   getFollowingByShop,
   follow: { followers, following },
+  getLikesByShop,
+  like: { likes },
   match,
   unfollowUser,
   followUser, }) => {
@@ -24,6 +26,7 @@ const Shop = ({
     getProductsByShop(match.params.id);
     getFollowersByShop(match.params.id);
     getFollowingByShop(match.params.id);
+    getLikesByShop(match.params.id);
   }, [getShop, getFollowersByShop, getFollowingByShop, getProductsByShop]);
 
   return (
@@ -52,6 +55,12 @@ const Shop = ({
           <ShopItem key={followee._id} shop={followee} />
         ))}
       </div>
+      <div>
+        Likes
+        {likes && likes.map(like => (
+          <ProductItem key={like._id} product={like} />
+        ))}
+      </div>
     </Fragment>
   )
 }
@@ -61,13 +70,15 @@ Shop.propTypes = {
   getShop: PropTypes.func.isRequired,
   shop: PropTypes.object.isRequired,
   getFollowersByShop: PropTypes.func.isRequired,
-  getFollowingByShop: PropTypes.func.isRequired
+  getFollowingByShop: PropTypes.func.isRequired,
+  getLikesByShop: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   shop: state.shop,
   product: state.product,
   follow: state.follow,
+  like: state.like,
 })
 
-export default connect(mapStateToProps, { getShop, followUser, unfollowUser, getProductsByShop, getFollowersByShop, getFollowingByShop })(Shop)
+export default connect(mapStateToProps, { getShop, followUser, unfollowUser, getProductsByShop, getFollowersByShop, getFollowingByShop, getLikesByShop })(Shop)

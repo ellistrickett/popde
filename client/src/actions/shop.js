@@ -4,6 +4,7 @@ import {
   SHOP_ERROR,
   GET_FOLLOWERS_BY_SHOP,
   GET_FOLLOWING_BY_SHOP,
+  GET_LIKES_BY_SHOP,
   FOLLOW_ERROR
 } from './types';
 
@@ -48,6 +49,23 @@ export const getFollowersByShop = (id) => async dispatch => {
 
     dispatch({ 
       type: GET_FOLLOWERS_BY_SHOP,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: FOLLOW_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+// Get shops likes
+export const getLikesByShop = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/user/likes/${id}`);
+
+    dispatch({ 
+      type: GET_LIKES_BY_SHOP,
       payload: res.data
     })
   } catch (err) {
