@@ -25,5 +25,7 @@ export const GET_MY_FOLLOWERS = 'GET_MY_FOLLOWERS';
 export const FOLLOW_ERROR = 'FOLLOW_ERROR';
 export const GET_SHOP = 'GET_SHOP';
 export const SHOP_ERROR = 'SHOP_ERROR';
+export const GET_FOLLOWERS_BY_SHOP = 'GET_FOLLOWERS_BY_SHOP';
+export const  GET_FOLLOWING_BY_SHOP = 'GET_FOLLOWING_BY_SHOP';
 
 

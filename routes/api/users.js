@@ -185,6 +185,36 @@ router.get('/my/followers', auth, async (req, res) => {
   }
 });
 
+//@route   GET api/users/followers/:id
+//@desc    Get all shop followers
+//@access  Public
+
+router.get('/followers/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select('-password');
+    const result = await User.find({ _id: user.followers.map(follower => (follower.user)) })
+    res.json(result)
+  } catch(err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+});
+
+//@route   GET api/users/my/following
+//@desc    Get all shop following
+//@access  Public
+
+router.get('/following/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select('-password');
+    const result = await User.find({ _id: user.following.map(followee => (followee.user)) })
+    res.json(result)
+  } catch(err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+});
+
 //@route   GET api/users/:id
 //@desc    Get a specific user
 //@access  Public
