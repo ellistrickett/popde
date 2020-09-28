@@ -196,13 +196,28 @@ router.put('/unlike/:id', auth, async (req, res) => {
   }
 })
 
-//@route   GET api/products/my
+//@route   GET api/products/my/likes
 //@desc    Get all products liked by a user
 //@access  Private
 
 router.get('/my/likes', auth, async (req, res) => {
   try {
     const likes = await UserLike.find({ user: req.user.id }).sort({ date: -1 })
+    const result = await Product.find({ _id: likes.map(like => (like.product)) })
+    res.json(result)
+  } catch(err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+});
+
+//@route   GET api/products/likes/:id
+//@desc    Get all products liked by a shop
+//@access  Private
+
+router.get('/likes/:id', async (req, res) => {
+  try {
+    const likes = await UserLike.find({ user: req.params.id }).sort({ date: -1 })
     const result = await Product.find({ _id: likes.map(like => (like.product)) })
     res.json(result)
   } catch(err) {
