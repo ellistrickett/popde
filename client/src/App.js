@@ -11,6 +11,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Products from './components/products/products';
 import Product from './components/product/product';
 import Shop from './components/shop/Shop';
+import Chat from './components/chat/Chat';
 import CreateProduct from './components/product-form/CreateProduct';
 import PrivateRoute from './components/routing/PrivateRoute';
 // Redux
@@ -44,6 +45,7 @@ const App = () => {
           <PrivateRoute exact path="/products/create" component={CreateProduct} />
           <Route exact path="/product/:id" component={Product} />
           <Route exact path="/users/:id" component={Shop} />
+          <Route exact path="/chat" component={Chat} />
         </Switch>
       </section>
     </Fragment>
