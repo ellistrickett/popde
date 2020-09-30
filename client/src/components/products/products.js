@@ -12,7 +12,7 @@ const Products = ({ getProducts, product: { products, loading }}) => {
   return (
     <Fragment>
       <h1>Products</h1>
-      <div>
+      <div className="row">
         {products.map(product => (
           <ProductItem key={product._id} product={product} />
         ))}
