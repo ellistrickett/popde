@@ -37,6 +37,9 @@ const Shop = ({
       </div>
       <button onClick={e => followUser(shop._id)}>Follow</button>
       <button onClick={e => unfollowUser(shop._id)}>Unfollow</button>
+        <Link to={`/chat/${match.params.id}`}>
+          Chat
+        </Link>
       <div>
         Selling
           {products && products.map(product => (

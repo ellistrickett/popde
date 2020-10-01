@@ -132,6 +132,27 @@ textarea {
 .name {
 }
 
+/* ---------------------------------- */
+/* Chat */
+/* ---------------------------------- */
+
+.messages-header {
+  border-bottom: 0.0625rem solid rgb(238, 238, 238);;
+  padding-bottom: 40px;
+}
+
+.chat-messages {
+	padding: 30px;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+
+.messages-text {
+  float: left;
+}
+
+
 .product-photo {
   max-width: 100%;
   height: auto;

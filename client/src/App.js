@@ -45,7 +45,7 @@ const App = () => {
           <PrivateRoute exact path="/products/create" component={CreateProduct} />
           <Route exact path="/product/:id" component={Product} />
           <Route exact path="/users/:id" component={Shop} />
-          <Route exact path="/chat" component={Chat} />
+          <Route exact path="/chat/:id" component={Chat} />
         </Switch>
       </section>
     </Fragment>
