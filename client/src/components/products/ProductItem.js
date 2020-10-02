@@ -8,7 +8,7 @@ const ProductItem = ({ auth, product: { _id, photo, price }}) => {
     <Fragment>
       <div>
         <Link to={`/product/${_id}`} >
-          <div class="col span-1-of-6">
+          <div className="col span-1-of-6">
             <img className='product-photo' src={photo} alt='' />
           </div>
         </Link>

@@ -1,47 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
+import Input from './Input';
+import Messages from './Messages';
+import InfoBar from './InfoBar';
+
 
 const socket = io('http://localhost:5000/');
 
 const Chat = () => {
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState([])
+
   useEffect(() => {
     console.log(socket.connected); // false
 
     socket.on('connect', () => {
       console.log(socket.connected); // true
+      socket.emit('joinChat')
     });
 
     socket.on('disconnect', () => {
       console.log(socket.connected); // false
     });
-  }, []);
 
-  const onSubmit = e => {
-    e.preventDefault();
-    const msg = e.target.elements.msg.value;
-    socket.emit('chatMessage', msg);
-    e.target.elements.msg.value = ''
-    e.target.elements.msg.focus()
+    socket.on('message', message => {
+      console.log(message)
+    })
+  }, []);
+    useEffect(() => {
+    socket.on('message', (message) => {
+      setMessages([...messages, message])
+    })
+  }, [messages])
+
+  const sendMessage = (event) => {
+    event.preventDefault();
+
+    if(message) {
+      socket.emit('sendMessage', message, () => setMessage(''))
+    }
   }
 
   return ( 
-    <div>
-      <div className="messages-header">
-        <h1 className="messages-text">Messages</h1>
+    <div className="outer-container">
+      <div className="container">
+        <InfoBar />
+        <Messages message={messages} />
+        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
-      <div className="chat-messages"></div>
-      <div className="chat-form-container">
-        <form id="chat-form" onSubmit={e => onSubmit(e)}>
-          <input
-            id="msg"
-            type="text"
-            placeholder="Enter Message"
-            required
-            autoComplete="off"
-          />
-          <input type="submit" className="btn" value="message" />
-        </form>
-      </div> 
     </div>
     )
 }

@@ -7,9 +7,15 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 io.on('connection', socket => {
+  socket.on('joinChat', () => {
+    socket.emit('message', 'Remember, all payments must be made in Popde, to make sure youre covered by Depop Protection.')
+  })
+
   // Listen for chatMessage
-  socket.on('chatMessage', msg => {
+  socket.on('sendMessage', msg => {
     console.log(msg)
+
+    io.emit('message', msg)
   });
 });
 
