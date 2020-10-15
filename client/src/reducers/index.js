@@ -5,6 +5,7 @@ import product from './product';
 import like from './like';
 import follow from './follow';
 import shop from './shop';
+import chat from './chat';
 
 export default combineReducers({
   alert,
@@ -12,5 +13,6 @@ export default combineReducers({
   product,
   like,
   follow,
-  shop
+  shop,
+  chat
 });

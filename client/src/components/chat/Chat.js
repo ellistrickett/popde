@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 import Input from './Input';
 import Messages from './Messages';
 import InfoBar from './InfoBar';
 import { connect } from 'react-redux';
+import { findUser } from '../../actions/chat';
 
 
 const socket = io('http://localhost:5000/');
 
-const Chat = ({ auth: { user }, match }) => {
+const Chat = ({ auth: { user }, match, findUser, chat: { chatUser } }) => {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
 
@@ -17,7 +19,7 @@ const Chat = ({ auth: { user }, match }) => {
 
     socket.on('connect', () => {
       console.log(socket.connected); // true
-      socket.emit('joinChat')
+      socket.emit('joinChat', )
     });
 
     socket.on('disconnect', () => {
@@ -34,11 +36,15 @@ const Chat = ({ auth: { user }, match }) => {
     })
   }, [messages])
 
+    useEffect(() => {
+      findUser(match.params.id)
+    }, [findUser])
+
   const sendMessage = (event) => {
     event.preventDefault();
 
     if(message) {
-      socket.emit('sendMessage', { body: message, seen: false, sender: user._id, recipient: match.params.id }, () => setMessage(''))
+      socket.emit('sendMessage', { body: message, seen: false, sender: user.username, recipient: chatUser.username }, () => setMessage(''))
     }
   }
 
@@ -53,8 +59,13 @@ const Chat = ({ auth: { user }, match }) => {
     )
 }
 
+Chat.propTypes = {
+  findUser: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  chat: state.chat
 })
 
-export default connect(mapStateToProps, null)(Chat);
+export default connect(mapStateToProps, { findUser })(Chat);

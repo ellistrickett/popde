@@ -28,5 +28,7 @@ export const SHOP_ERROR = 'SHOP_ERROR';
 export const GET_FOLLOWERS_BY_SHOP = 'GET_FOLLOWERS_BY_SHOP';
 export const GET_FOLLOWING_BY_SHOP = 'GET_FOLLOWING_BY_SHOP';
 export const GET_LIKES_BY_SHOP = 'GET_LIKES_BY_SHOP';
+export const FIND_USER = 'FIND_USER';
+export const CHAT_ERROR = 'CHAT_ERROR';
 
 
