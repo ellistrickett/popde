@@ -1,14 +1,17 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getShop, getFollowersByShop, getFollowingByShop, getLikesByShop } from '../../actions/shop';
+import { getChatName } from '../../actions/chat';
 import { followUser, unfollowUser } from '../../actions/follow';
 import { getProductsByShop } from '../../actions/product';
 import ProductItem from '../products/ProductItem';
 import ShopItem from '../shops/ShopItem';
+import Join from '../chat/Join';
 
 const Shop = ({ 
+  auth: { user },
   getShop,
   shop: { shop },
   getProductsByShop,
@@ -20,14 +23,18 @@ const Shop = ({
   like: { likes },
   match,
   unfollowUser,
-  followUser, }) => {
+  getChatName,
+  chat: { chatName },
+  followUser }) => {
+
   useEffect(() => {
     getShop(match.params.id);
     getProductsByShop(match.params.id);
     getFollowersByShop(match.params.id);
     getFollowingByShop(match.params.id);
     getLikesByShop(match.params.id);
-  }, [getShop, getFollowersByShop, getFollowingByShop, getProductsByShop]);
+    getChatName(match.params.id, user)
+  }, [getShop, getFollowersByShop, getFollowingByShop, getProductsByShop, getChatName]);
 
   return (
     <Fragment>
@@ -37,9 +44,11 @@ const Shop = ({
       </div>
       <button onClick={e => followUser(shop._id)}>Follow</button>
       <button onClick={e => unfollowUser(shop._id)}>Unfollow</button>
-        <Link to={`/chat/${match.params.id}`}>
-          Chat
-        </Link>
+      <Link to={`/chat/${chatName}`} >
+          <div>
+            <ion-icon name="mail-outline"></ion-icon>
+          </div>
+      </Link>
       <div>
         Selling
           {products && products.map(product => (
@@ -69,6 +78,7 @@ const Shop = ({
 }
 
 Shop.propTypes = {
+  getChatName: PropTypes.func.isRequired,
   getProductsByShop: PropTypes.func.isRequired,
   getShop: PropTypes.func.isRequired,
   shop: PropTypes.object.isRequired,
@@ -78,10 +88,12 @@ Shop.propTypes = {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   shop: state.shop,
   product: state.product,
   follow: state.follow,
   like: state.like,
+  chat: state.chat
 })
 
-export default connect(mapStateToProps, { getShop, followUser, unfollowUser, getProductsByShop, getFollowersByShop, getFollowingByShop, getLikesByShop })(Shop)
+export default connect(mapStateToProps, { getShop, followUser, unfollowUser, getProductsByShop, getFollowersByShop, getFollowingByShop, getLikesByShop, getChatName })(Shop)

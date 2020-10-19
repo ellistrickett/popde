@@ -9,7 +9,8 @@ const io = require('socket.io')(server);
 const message = require('./models/Message')
 
 io.on('connection', socket => {
-  socket.on('joinChat', () => {
+  socket.on('joinChat', (users) => {
+    console.log(users)
     socket.emit('message', 'Remember, all payments must be made in Popde, to make sure youre covered by Depop Protection.')
   })
 

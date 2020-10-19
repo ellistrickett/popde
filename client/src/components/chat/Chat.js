@@ -11,34 +11,27 @@ import { findUser } from '../../actions/chat';
 const socket = io('http://localhost:5000/');
 
 const Chat = ({ auth: { user }, match, findUser, chat: { chatUser } }) => {
+  const [room, setRoom] = useState('')
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
 
   useEffect(() => {
-    console.log(socket.connected); // false
+    findUser(match.params.id)
+  }, [findUser])
 
-    socket.on('connect', () => {
-      console.log(socket.connected); // true
-      socket.emit('joinChat', )
-    });
+  // useEffect(() => {
+  //   var arr = []
+  //   arr.push(user.username.substring(0, 4))
+  //   arr.push(shop.username.substring(0, 4))
+  //   var room1 = (arr.sort().join("_"));
+  //   console.log(room1)
+  // }, []);
 
-    socket.on('disconnect', () => {
-      console.log(socket.connected); // false
-    });
-
-    socket.on('message', message => {
-      console.log(message)
-    })
-  }, []);
     useEffect(() => {
     socket.on('message', (message) => {
       setMessages([...messages, message])
     })
   }, [messages])
-
-    useEffect(() => {
-      findUser(match.params.id)
-    }, [findUser])
 
   const sendMessage = (event) => {
     event.preventDefault();
