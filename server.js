@@ -6,7 +6,7 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-const message = require('./models/Message')
+const Message = require('./models/Message')
 
 io.on('connection', socket => {
   socket.on('joinChat', (users) => {
@@ -17,7 +17,7 @@ io.on('connection', socket => {
   // Listen for chatMessage
   socket.on('sendMessage', msg => {
     console.log(msg)
-    const instance = new message(msg)
+    const instance = new Message(msg)
     try {
       const result = instance.save();
       console.log(result)

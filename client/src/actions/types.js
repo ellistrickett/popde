@@ -31,5 +31,6 @@ export const GET_LIKES_BY_SHOP = 'GET_LIKES_BY_SHOP';
 export const FIND_USER = 'FIND_USER';
 export const CHAT_ERROR = 'CHAT_ERROR';
 export const GET_CHAT_NAME = 'GET_CHAT_NAME'
+export const GET_MESSAGES = "GET_MESSAGES"
 
 

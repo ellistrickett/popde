@@ -5,39 +5,29 @@ import Input from './Input';
 import Messages from './Messages';
 import InfoBar from './InfoBar';
 import { connect } from 'react-redux';
-import { findUser } from '../../actions/chat';
-
+import { getMessages } from '../../actions/chat';
 
 const socket = io('http://localhost:5000/');
 
-const Chat = ({ auth: { user }, match, findUser, chat: { chatUser } }) => {
-  const [room, setRoom] = useState('')
-  const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState([])
+const Chat = ({ auth: { user }, getMessages, chat: { chatUser, chatName, messages }, match,  }) => {
+  const [inputMessage, setInputMessage] = useState("")
+  const [previousMessage, setPreviousMessage ] = useState("")
 
   useEffect(() => {
-    findUser(match.params.id)
-  }, [findUser])
+    getMessages(chatName)
+  }, [getMessages])
 
-  // useEffect(() => {
-  //   var arr = []
-  //   arr.push(user.username.substring(0, 4))
-  //   arr.push(shop.username.substring(0, 4))
-  //   var room1 = (arr.sort().join("_"));
-  //   console.log(room1)
-  // }, []);
-
-    useEffect(() => {
+  useEffect(() => {
     socket.on('message', (message) => {
-      setMessages([...messages, message])
+      setPreviousMessage([message])
     })
-  }, [messages])
+  }, [previousMessage])
 
   const sendMessage = (event) => {
     event.preventDefault();
 
-    if(message) {
-      socket.emit('sendMessage', { body: message, seen: false, sender: user.username, recipient: chatUser.username }, () => setMessage(''))
+    if(inputMessage) {
+      socket.emit('sendMessage', { chatName: chatName, body: inputMessage, seen: false, sender: user._id, recipient: chatUser._id }, () => setInputMessage(''))
     }
   }
 
@@ -46,14 +36,14 @@ const Chat = ({ auth: { user }, match, findUser, chat: { chatUser } }) => {
       <div className="container">
         <InfoBar />
         <Messages messages={messages.map(message => (message.body))} />
-        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
+        <Input inputMessage={inputMessage} setInputMessage={setInputMessage} sendMessage={sendMessage} />
       </div>
     </div>
     )
 }
 
 Chat.propTypes = {
-  findUser: PropTypes.func.isRequired
+  getMessages: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -61,4 +51,4 @@ const mapStateToProps = state => ({
   chat: state.chat
 })
 
-export default connect(mapStateToProps, { findUser })(Chat);
+export default connect(mapStateToProps, { getMessages })(Chat);

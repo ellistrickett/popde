@@ -8,7 +8,6 @@ import { followUser, unfollowUser } from '../../actions/follow';
 import { getProductsByShop } from '../../actions/product';
 import ProductItem from '../products/ProductItem';
 import ShopItem from '../shops/ShopItem';
-import Join from '../chat/Join';
 
 const Shop = ({ 
   auth: { user },
