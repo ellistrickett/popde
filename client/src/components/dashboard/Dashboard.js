@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import { getMyProducts } from '../../actions/product';
 import { getMyLikes } from '../../actions/like';
 import { getMyFollowers, getMyFollowing } from '../../actions/follow';
-import ProductItem from '../products/ProductItem';
-import ShopItem from '../shops/ShopItem';
+import Selling from '../shop/Selling';
+import Followers from '../shop/Followers';
+import Likes from '../shop/Likes';
+import Following from '../shop/Following';
 
 const Dashboard = ({ 
   getMyFollowers,
@@ -28,30 +30,10 @@ const Dashboard = ({
     <Fragment>
       <h1>{user && user.name}</h1>
       <p>@{user && user.username}</p>
-      <div>
-        Selling
-        {products && products.map(product => (
-          <ProductItem key={product._id} product={product} />
-        ))}
-      </div>
-      <div>
-        Likes
-        {likes && likes.map(like => (
-          <ProductItem key={like._id} product={like} />
-        ))}
-      </div>
-      <div>
-        Followers<br />
-        @{followers && followers.map(follower => (
-          <ShopItem key={follower._id} shop={follower} />
-        ))}
-      </div>
-      <div>
-        Following<br />
-        @{following && following.map(followee => (
-          <ShopItem key={followee._id} shop={followee} />
-        ))}
-      </div>
+      <Selling products={products} />
+      <Followers followers={followers} />
+      <Following following={following} />
+      <Likes likes={likes} />
     </Fragment>   
   )
 }
