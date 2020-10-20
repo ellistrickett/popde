@@ -9,9 +9,8 @@ const Message = require('../../models/Message');
 //@desc    Get message by room
 //@access  Private
 
-router.get('/chat/:id', auth, async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
   try {
-    console.log(req.params.id)
     const messages = await Message.find({ chatName: req.params.id });
     
 
@@ -28,3 +27,5 @@ router.get('/chat/:id', auth, async (req, res) => {
     res.status(500).send('Server Error')
   }
 });
+
+module.exports = router;

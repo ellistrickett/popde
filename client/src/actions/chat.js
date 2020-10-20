@@ -7,9 +7,9 @@ import {
 } from './types';
 
 // Get Messages
-export const getMessages = id => async dispatch => {
+export const getMessages = room => async dispatch => {
   try {
-    const res = await axios.get(`/api/chat/${id}`);
+    const res = await axios.get(`/api/chat/${room}`);
 
     dispatch({ 
       type: GET_MESSAGES,
