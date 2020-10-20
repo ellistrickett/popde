@@ -11,23 +11,22 @@ const socket = io('http://localhost:5000/');
 
 const Chat = ({ auth: { user }, getMessages, chat: { chatUser, chatName, messages }, match,  }) => {
   const [inputMessage, setInputMessage] = useState("")
-  const [previousMessage, setPreviousMessage ] = useState("")
 
   useEffect(() => {
     getMessages(chatName)
   }, [getMessages])
 
   useEffect(() => {
-    socket.on('message', (message) => {
-      setPreviousMessage([message])
+    socket.on('message', () => {
+      getMessages(chatName)
     })
-  }, [previousMessage])
+  }, [messages])
 
   const sendMessage = (event) => {
     event.preventDefault();
 
     if(inputMessage) {
-      socket.emit('sendMessage', { chatName: chatName, body: inputMessage, seen: false, sender: user._id, recipient: chatUser._id }, () => setInputMessage(''))
+      socket.emit('sendMessage', { chatName: chatName, body: inputMessage, seen: false, sender: user.username, recipient: chatUser.username, senderId: user._id, recipientId: user._id }, () => setInputMessage(''))
     }
   }
 
@@ -35,7 +34,7 @@ const Chat = ({ auth: { user }, getMessages, chat: { chatUser, chatName, message
     <div className="outer-container">
       <div className="container">
         <InfoBar />
-        <Messages messages={messages.map(message => (message.body))} />
+        <Messages messages={messages} />
         <Input inputMessage={inputMessage} setInputMessage={setInputMessage} sendMessage={sendMessage} />
       </div>
     </div>

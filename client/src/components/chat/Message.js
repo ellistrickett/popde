@@ -14,11 +14,10 @@ const Message = ({ message }) => {
     // ) 
     // : (
       <div className="messageContainer justifyStart ">
-      <p className="sentText">User</p>
-      <div className="messageBox backgroundLight">
-        <p className="messageText colorDark">{message}</p>
-      </div>
-      <p className="sentText pl-10">User</p>
+      <p className="sentText">{message.sender}</p>
+        <div className="messageBox backgroundLight">
+          <p className="messageText colorDark">{message.body}</p>
+        </div>
     </div>
     // )
   )

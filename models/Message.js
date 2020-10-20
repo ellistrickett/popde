@@ -11,11 +11,17 @@ const messageSchema = new Schema({
   seen: {
     type: Boolean
   },
-  sender: {
+  senderId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
+  sender: {
+    type: String
+  },
   recipient: {
+    type: String
+  },
+  recipientId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   }
