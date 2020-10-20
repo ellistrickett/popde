@@ -6,8 +6,10 @@ import { getShop, getFollowersByShop, getFollowingByShop, getLikesByShop } from 
 import { getChatName } from '../../actions/chat';
 import { followUser, unfollowUser } from '../../actions/follow';
 import { getProductsByShop } from '../../actions/product';
-import ProductItem from '../products/ProductItem';
-import ShopItem from '../shops/ShopItem';
+import Selling from './Selling';
+import Followers from './Followers';
+import Likes from './Likes';
+import Following from './Following';
 
 const Shop = ({ 
   auth: { user },
@@ -48,30 +50,10 @@ const Shop = ({
             <ion-icon name="mail-outline"></ion-icon>
           </div>
       </Link>
-      <div>
-        Selling
-          {products && products.map(product => (
-            <ProductItem key={product._id} product={product} />
-          ))}
-      </div>
-      <div>
-        Followers<br />
-        @{followers && followers.map(follower => (
-          <ShopItem key={follower._id} shop={follower} />
-        ))}
-      </div>
-      <div>
-        Following<br />
-        @{following && following.map(followee => (
-          <ShopItem key={followee._id} shop={followee} />
-        ))}
-      </div>
-      <div>
-        Likes
-        {likes && likes.map(like => (
-          <ProductItem key={like._id} product={like} />
-        ))}
-      </div>
+      <Selling products={products} />
+      <Followers followers={followers} />
+      <Following following={following} />
+      <Likes likes={likes} />
     </Fragment>
   )
 }
