@@ -28,7 +28,7 @@ export const getShop = id => async dispatch => {
 // Get shops following
 export const getFollowingByShop = (id) => async dispatch => {
   try {
-    const res = await axios.get(`/api/user/following/${id}`);
+    const res = await axios.get(`/api/users/following/${id}`);
 
     dispatch({ 
       type: GET_FOLLOWING_BY_SHOP,
@@ -45,7 +45,7 @@ export const getFollowingByShop = (id) => async dispatch => {
 // Get shops followers
 export const getFollowersByShop = (id) => async dispatch => {
   try {
-    const res = await axios.get(`/api/user/followers/${id}`);
+    const res = await axios.get(`/api/users/followers/${id}`);
 
     dispatch({ 
       type: GET_FOLLOWERS_BY_SHOP,
@@ -62,7 +62,7 @@ export const getFollowersByShop = (id) => async dispatch => {
 // Get shops likes
 export const getLikesByShop = (id) => async dispatch => {
   try {
-    const res = await axios.get(`/api/user/likes/${id}`);
+    const res = await axios.get(`/api/products/likes/${id}`);
 
     dispatch({ 
       type: GET_LIKES_BY_SHOP,

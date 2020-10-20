@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 import Input from './Input';
