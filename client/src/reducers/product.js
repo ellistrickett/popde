@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   products: [],
-  product: null,
+  selectedProduct: null,
   loading: true,
   error: {}
 }
@@ -28,7 +28,7 @@ export default function(state=initialState, action) {
     case GET_PRODUCT:
       return {
         ...state,
-        product: payload,
+        selectedProduct: payload,
         loading: false
       }
       case PRODUCT_ERROR:

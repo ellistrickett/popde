@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProduct } from '../../actions/product';
 import { addLike, removeLike } from '../../actions/like';
@@ -12,7 +13,7 @@ const Product = ({
   addLike, 
   removeLike,
   getProduct, 
-  product: { product }, 
+  product: { selectedProduct, loading }, 
   match }) => {
   useEffect(() => {
     getProduct(match.params.id);
@@ -21,15 +22,20 @@ const Product = ({
   return (
     <Fragment>
       <div>
-        product
+        {selectedProduct && selectedProduct.name}
       </div>
-      <button onClick={e => addLike(product._id)}>Like</button>
-      <button onClick={e => removeLike(product._id)}>Unlike</button>
-      <div>
-        {product && product.username}
+      <button onClick={e => addLike(selectedProduct._id)}>Like</button>
+      <button onClick={e => removeLike(selectedProduct._id)}>Unlike</button>
+      <div> 
+        { loading === false ? (
+          <Link to={`/users/${selectedProduct.userId}`} >
+            {selectedProduct && selectedProduct.username}
+          </Link> 
+        ) : ( selectedProduct && selectedProduct.username )
+        }
       </div>
-      <button onClick={e => followUser(product.userId)}>Follow</button>
-      <button onClick={e => unfollowUser(product.userId)}>Unfollow</button>
+      <button onClick={e => followUser(selectedProduct.userId)}>Follow</button>
+      <button onClick={e => unfollowUser(selectedProduct.userId)}>Unfollow</button>
     </Fragment>
 
   )
@@ -37,7 +43,7 @@ const Product = ({
 
 Product.propTypes = {
   getProduct: PropTypes.func.isRequired,
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
