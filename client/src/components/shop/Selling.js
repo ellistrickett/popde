@@ -5,7 +5,6 @@ const Selling = ({ products }) => {
 
   return (
     <div>
-      <div>Selling</div>
       <div>
         {products && products.map(product => (
             <ProductItem key={product._id} product={product} />

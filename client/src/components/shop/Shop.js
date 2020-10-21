@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -37,6 +37,8 @@ const Shop = ({
     getChatName(match.params.id, user)
   }, [getShop, getFollowersByShop, getFollowingByShop, getProductsByShop, getChatName]);
 
+  const [showLikes, setShowLikes] = useState(false)
+
   return (
     <Fragment>
       <div>
@@ -50,10 +52,17 @@ const Shop = ({
             <ion-icon name="mail-outline"></ion-icon>
           </div>
       </Link>
-      <Selling products={products} />
+      <button>Followers</button>
+      <button>Following</button>
+      <button onClick={e => setShowLikes(false)}>Selling</button>
+      <button onClick={e => setShowLikes(true)}>Likes</button>
+      { showLikes === false ? (
+        <Selling products={products} />
+        ) : (
+          <Likes likes={likes} />
+        )}
       <Followers followers={followers} />
       <Following following={following} />
-      <Likes likes={likes} />
     </Fragment>
   )
 }

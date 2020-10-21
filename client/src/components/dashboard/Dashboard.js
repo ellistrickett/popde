@@ -31,9 +31,9 @@ const Dashboard = ({
       <h1>{user && user.name}</h1>
       <p>@{user && user.username}</p>
       <Selling products={products} />
+      <Likes likes={likes} />
       <Followers followers={followers} />
       <Following following={following} />
-      <Likes likes={likes} />
     </Fragment>   
   )
 }
