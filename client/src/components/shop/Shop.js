@@ -41,11 +41,10 @@ const Shop = ({
   const [showLikes, setShowLikes] = useState(false)
   const [displayModal, setDisplayModal] = useState(false)
 
-
   return (
     <Fragment>
             { displayModal === true ? (
-        <FollowModal />
+        <FollowModal followers={followers} following={following} />
       ) : null }
       <div className="positioned">
       <div>
@@ -68,8 +67,6 @@ const Shop = ({
         ) : (
           <Likes likes={likes} />
         )}
-      <Followers followers={followers} />
-      <Following following={following} />
       </div>
     </Fragment>
   )

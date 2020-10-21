@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Followers from '../shop/Followers';
+import Following from '../shop/Following';
 
-const FollowModal = props => {
+const FollowModal = ({ followers, following }) => {
   return ReactDOM.createPortal(
     <div className="modal">
       <div className="modal-body">
-        yfgyufvhvjgjhb
+      <Followers followers={followers} />
+      <Following following={following} />
       </div>
     </div>,
     document.querySelector('#modal')
