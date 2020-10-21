@@ -159,5 +159,32 @@ textarea {
   width: 180px;
 }
 
+/* ---------------------------------- */
+/* Modal */
+/* ---------------------------------- */
+
+.modal {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+.modal-body {
+  background-color: white;
+  margin: auto;
+  height: 30%;
+  width: 30%;
+}
+
+.positioned {
+  position: relative;
+  z-index: 0;
+}
+
+
 
 

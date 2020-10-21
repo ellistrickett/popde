@@ -10,6 +10,7 @@ import Selling from './Selling';
 import Followers from './Followers';
 import Likes from './Likes';
 import Following from './Following';
+import FollowModal from '../layout/FollowModal';
 
 const Shop = ({ 
   auth: { user },
@@ -38,9 +39,15 @@ const Shop = ({
   }, [getShop, getFollowersByShop, getFollowingByShop, getProductsByShop, getChatName]);
 
   const [showLikes, setShowLikes] = useState(false)
+  const [displayModal, setDisplayModal] = useState(false)
+
 
   return (
     <Fragment>
+            { displayModal === true ? (
+        <FollowModal />
+      ) : null }
+      <div className="positioned">
       <div>
         { shop && shop.name }<br />
         @{ shop && shop.username}
@@ -52,8 +59,8 @@ const Shop = ({
             <ion-icon name="mail-outline"></ion-icon>
           </div>
       </Link>
-      <button>Followers</button>
-      <button>Following</button>
+      <button onClick={e => setDisplayModal(true)}>>Followers</button>
+      <button onClick={e => setDisplayModal(true)}>Following</button>
       <button onClick={e => setShowLikes(false)}>Selling</button>
       <button onClick={e => setShowLikes(true)}>Likes</button>
       { showLikes === false ? (
@@ -63,6 +70,7 @@ const Shop = ({
         )}
       <Followers followers={followers} />
       <Following following={following} />
+      </div>
     </Fragment>
   )
 }
