@@ -36,7 +36,7 @@ const Shop = ({
     getFollowingByShop(match.params.id);
     getLikesByShop(match.params.id);
     getChatName(match.params.id, user)
-  }, [getShop, getFollowersByShop, getFollowingByShop, getProductsByShop, getChatName]);
+  }, [match.params.id, getShop, getFollowersByShop, getFollowingByShop, getProductsByShop, getChatName]);
 
   const [showLikes, setShowLikes] = useState(false)
   const [displayModal, setDisplayModal] = useState(false)
@@ -44,7 +44,7 @@ const Shop = ({
   return (
     <Fragment>
             { displayModal === true ? (
-        <FollowModal followers={followers} following={following} />
+        <FollowModal followers={followers} following={following} onClose={() => setDisplayModal(false)} />
       ) : null }
       <div className="positioned">
       <div>

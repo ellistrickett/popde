@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import Followers from '../shop/Followers';
 import Following from '../shop/Following';
 
-const FollowModal = ({ followers, following }) => {
+const FollowModal = ({ followers, following, onClose }) => {
   return ReactDOM.createPortal(
-    <div className="modal">
-      <div className="modal-body">
+    <div className="modal" onClick={onClose}>
+      <div className="modal-body" onClick={(e) => e.stopPropagation()}>
       <Followers followers={followers} />
       <Following following={following} />
       </div>
@@ -15,4 +16,8 @@ const FollowModal = ({ followers, following }) => {
   )
 };
 
-export default FollowModal;
+const mapStateToProps = state => ({
+  shop: state.shop,
+})
+
+export default connect(mapStateToProps, null)(FollowModal);
