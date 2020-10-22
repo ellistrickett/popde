@@ -6,8 +6,8 @@ const Followers = ({ followers }) => {
   return (
     <div>
       <div>Followers</div>
-      <div>
-        @{followers && followers.map(follower => (
+      <div className="shop_item">
+        {followers && followers.map(follower => (
           <ShopItem key={follower._id} shop={follower} />
         ))}
       </div>

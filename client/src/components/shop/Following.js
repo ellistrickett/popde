@@ -5,9 +5,9 @@ const Following = ({ following }) => {
 
   return (
     <div>
-      <div>following</div>
-      <div>
-        @{following && following.map(followee => (
+      <div>Following</div>
+      <div className="shop_item">
+        {following && following.map(followee => (
           <ShopItem key={followee._id} shop={followee} />
         ))}
       </div>
