@@ -1,7 +1,7 @@
 import React from 'react';
 import ShopItem from '../shops/ShopItem';
 
-const Following = ({ following }) => {
+const Following = ({ following, onClose }) => {
 
   return (
     <div>

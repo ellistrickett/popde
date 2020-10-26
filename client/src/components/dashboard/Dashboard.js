@@ -1,13 +1,12 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getMyProducts } from '../../actions/product';
 import { getMyLikes } from '../../actions/like';
 import { getMyFollowers, getMyFollowing } from '../../actions/follow';
 import Selling from '../shop/Selling';
-import Followers from '../shop/Followers';
 import Likes from '../shop/Likes';
-import Following from '../shop/Following';
+import FollowModal from '../layout/FollowModal';
 
 const Dashboard = ({ 
   getMyFollowers,
@@ -26,14 +25,27 @@ const Dashboard = ({
     getMyLikes();
   }, [getMyProducts, getMyLikes, getMyFollowers, getMyFollowing]);
 
+  const [showLikes, setShowLikes] = useState(false)
+  const [displayModal, setDisplayModal] = useState(false)
+
   return (
     <Fragment>
+      { displayModal === true ? (
+        <FollowModal followers={followers} following={following} onClose={() => setDisplayModal(false)} />
+      ) : null }
+      <div className="positioned">
       <h1>{user && user.name}</h1>
       <p>@{user && user.username}</p>
-      <Selling products={products} />
-      <Likes likes={likes} />
-      <Followers followers={followers} />
-      <Following following={following} />
+      <button onClick={e => setDisplayModal(true)}>>Followers</button>
+      <button onClick={e => setDisplayModal(true)}>Following</button>
+      <button onClick={e => setShowLikes(false)}>Selling</button>
+      <button onClick={e => setShowLikes(true)}>Likes</button>
+      { showLikes === false ? (
+        <Selling products={products} />
+        ) : (
+          <Likes likes={likes} />
+        )}
+      </div>
     </Fragment>   
   )
 }

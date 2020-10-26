@@ -8,8 +8,8 @@ const FollowModal = ({ followers, following, onClose }) => {
   return ReactDOM.createPortal(
     <div className="modal" onClick={onClose}>
       <div className="modal-body" onClick={(e) => e.stopPropagation()}>
-      <Followers followers={followers} />
-      <Following following={following} />
+      <Followers followers={followers} onClick={onClose} />
+      <Following following={following} onClick={onClose} />
       </div>
     </div>,
     document.querySelector('#modal')
