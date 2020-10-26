@@ -6,10 +6,13 @@ import Following from '../shop/Following';
 
 const FollowModal = ({ followers, following, onClose }) => {
   return ReactDOM.createPortal(
-    <div className="modal" onClick={onClose}>
-      <div className="modal-body" onClick={(e) => e.stopPropagation()}>
-      <Followers followers={followers} onClick={onClose} />
-      <Following following={following} onClick={onClose} />
+    <div className="modal" >
+      <div className="modal-body">
+        <div className="modal-links" onClick={onClose}>
+          <ion-icon name="close-circle-outline"></ion-icon>
+          <Followers followers={followers} />
+          <Following following={following} />
+        </div>
       </div>
     </div>,
     document.querySelector('#modal')

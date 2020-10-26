@@ -7,9 +7,7 @@ import { getChatName } from '../../actions/chat';
 import { followUser, unfollowUser } from '../../actions/follow';
 import { getProductsByShop } from '../../actions/product';
 import Selling from './Selling';
-import Followers from './Followers';
 import Likes from './Likes';
-import Following from './Following';
 import FollowModal from '../layout/FollowModal';
 
 const Shop = ({ 
