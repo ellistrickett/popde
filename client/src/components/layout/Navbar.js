@@ -12,6 +12,7 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
       <Link to ="/products/create" className="sell">Sell</Link>
       <Link to ="/search" className="search">Search</Link>
       <Link to ="/dashboard" className="dashboard">Your Profile</Link>
+      <Link to="/chat" className="mailbox"><ion-icon name="mail-outline"></ion-icon></Link>
     </div>
   );
 

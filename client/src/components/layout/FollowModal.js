@@ -5,6 +5,7 @@ import Followers from '../shop/Followers';
 import Following from '../shop/Following';
 
 const FollowModal = ({ followers, following, onClose }) => {
+
   return ReactDOM.createPortal(
     <div className="modal" >
       <div className="modal-body">

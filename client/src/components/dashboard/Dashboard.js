@@ -36,7 +36,7 @@ const Dashboard = ({
       <div className="positioned">
       <h1>{user && user.name}</h1>
       <p>@{user && user.username}</p>
-      <button onClick={e => setDisplayModal(true)}>>Followers</button>
+      <button onClick={e => setDisplayModal(true)}>Followers</button>
       <button onClick={e => setDisplayModal(true)}>Following</button>
       <button onClick={e => setShowLikes(false)}>Selling</button>
       <button onClick={e => setShowLikes(true)}>Likes</button>
